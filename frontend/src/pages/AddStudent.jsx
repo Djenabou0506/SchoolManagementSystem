@@ -33,29 +33,31 @@ function AddStudent() {
 
 
 
-  useEffect(()=>{
+useEffect(()=>{
 
-    getClasses();
+  getClasses();
 
-  },[]);
+},[]);
 
 
 
-  const getClasses = async()=>{
+const getClasses = async()=>{
 
-    try{
+  try{
 
-      const response = await api.get("classes/");
-      setClasses(response.data);
+    const response = await api.get("classes/");
 
-    }catch(error){
+    console.log("LISTE DES CLASSES :", response.data);
 
-      console.log(error);
+    setClasses(response.data);
 
-    }
+  }catch(error){
 
-  };
+    console.log("ERREUR CLASSES :", error);
 
+  }
+
+};
 
 
   const handleChange=(e)=>{

@@ -2,12 +2,23 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api";
 
+import {
+  FaUser,
+  FaCalendar,
+  FaPhone,
+  FaSchool,
+  FaSave
+} from "react-icons/fa";
+
 
 function EditStudent(){
 
   const {id} = useParams();
 
   const navigate = useNavigate();
+
+
+  const [classes, setClasses] = useState([]);
 
 
   const [student,setStudent] = useState({
@@ -26,16 +37,21 @@ function EditStudent(){
   useEffect(()=>{
 
     getStudent();
+    getClasses();
 
   },[]);
 
 
 
+  // récupérer étudiant
+
   const getStudent = async()=>{
 
     try{
 
-      const response = await api.get(`students/${id}/`);
+      const response = await api.get(
+        `students/${id}/`
+      );
 
       setStudent(response.data);
 
@@ -50,16 +66,46 @@ function EditStudent(){
 
 
 
+
+  // récupérer classes
+
+  const getClasses = async()=>{
+
+    try{
+
+      const response = await api.get(
+        "classes/"
+      );
+
+      setClasses(response.data);
+
+
+    }catch(error){
+
+      console.log(error);
+
+    }
+
+  };
+
+
+
+
+
   const handleChange=(e)=>{
 
     setStudent({
 
       ...student,
+
       [e.target.name]:e.target.value
 
     });
 
   };
+
+
+
 
 
 
@@ -72,12 +118,17 @@ function EditStudent(){
 
 
       await api.put(
+
         `students/${id}/`,
+
         student
+
       );
 
 
-      alert("Modification réussie");
+      alert(
+        "Étudiant modifié avec succès"
+      );
 
 
       navigate("/students");
@@ -89,8 +140,9 @@ function EditStudent(){
 
     }
 
-
   };
+
+
 
 
 
@@ -99,16 +151,21 @@ return (
 <div className="container-fluid">
 
 
-<div className="card shadow">
+<div className="card shadow-lg">
 
 
 <div className="card-header bg-warning">
 
-<h4>
+
+<h4 className="mb-0">
+
 ✏️ Modifier étudiant
+
 </h4>
 
+
 </div>
+
 
 
 
@@ -121,11 +178,17 @@ return (
 <div className="row">
 
 
+
+
+
 <div className="col-md-6 mb-3">
 
-<label>
-Prénom
+<label className="form-label">
+
+<FaUser/> Prénom
+
 </label>
+
 
 <input
 
@@ -139,15 +202,23 @@ onChange={handleChange}
 
 />
 
+
 </div>
+
+
+
+
 
 
 
 <div className="col-md-6 mb-3">
 
-<label>
-Nom
+<label className="form-label">
+
+<FaUser/> Nom
+
 </label>
+
 
 <input
 
@@ -161,16 +232,23 @@ onChange={handleChange}
 
 />
 
+
 </div>
+
+
+
 
 
 
 
 <div className="col-md-6 mb-3">
 
-<label>
-Date naissance
+<label className="form-label">
+
+<FaCalendar/> Date naissance
+
 </label>
+
 
 <input
 
@@ -186,15 +264,21 @@ onChange={handleChange}
 
 />
 
+
 </div>
+
+
+
 
 
 
 
 <div className="col-md-6 mb-3">
 
-<label>
+<label className="form-label">
+
 Sexe
+
 </label>
 
 
@@ -210,13 +294,16 @@ onChange={handleChange}
 
 >
 
+
 <option value="">
 Choisir
 </option>
 
+
 <option value="masculin">
 Masculin
 </option>
+
 
 <option value="féminin">
 Féminin
@@ -231,11 +318,17 @@ Féminin
 
 
 
+
+
+
 <div className="col-md-6 mb-3">
 
-<label>
-Téléphone
+<label className="form-label">
+
+<FaPhone/> Téléphone
+
 </label>
+
 
 <input
 
@@ -253,20 +346,90 @@ onChange={handleChange}
 </div>
 
 
+
+
+
+
+
+
+<div className="col-md-6 mb-3">
+
+<label className="form-label">
+
+<FaSchool/> Classe
+
+</label>
+
+
+<select
+
+className="form-select"
+
+name="classe"
+
+value={student.classe || ""}
+
+onChange={handleChange}
+
+>
+
+
+<option value="">
+Choisir une classe
+</option>
+
+
+
+{
+
+classes.map((classe)=>(
+
+<option
+
+key={classe.id}
+
+value={classe.id}
+
+>
+
+{classe.nom}
+
+</option>
+
+
+))
+
+}
+
+
+
+</select>
+
+
 </div>
+
+
+
+
+</div>
+
+
 
 
 
 <div className="text-end">
 
-<button className="btn btn-success">
 
-💾 Enregistrer modification
+<button className="btn btn-success px-4">
+
+<FaSave/> Enregistrer modification
 
 </button>
 
 
 </div>
+
+
 
 
 
