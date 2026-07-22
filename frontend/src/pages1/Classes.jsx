@@ -148,9 +148,8 @@ classes.map((classe)=>(
 </td>
 
 <td>
-{classe.teacher}
+{classe.teacher_prenom} {classe.teacher_nom}
 </td>
-
 
 <td>
 

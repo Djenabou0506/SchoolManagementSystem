@@ -4,25 +4,43 @@ import api from "../api/api";
 
 function Dashboard() {
 
+
   const [students, setStudents] = useState(0);
   const [classes, setClasses] = useState(0);
   const [teachers, setTeachers] = useState(0);
   const [subjects, setSubjects] = useState(0);
 
+  const [parents, setParents] = useState(0);
+  const [grades, setGrades] = useState(0);
+  const [attendance, setAttendance] = useState(0);
+
+
 
   useEffect(() => {
+
     loadStatistics();
+
   }, []);
+
+
+
 
 
   const loadStatistics = async () => {
 
+
     try {
+
 
       const studentsResponse = await api.get("students/");
       const classesResponse = await api.get("classes/");
       const teachersResponse = await api.get("teachers/");
       const subjectsResponse = await api.get("subjects/");
+
+      const parentsResponse = await api.get("parents/");
+      const gradesResponse = await api.get("grades/");
+      const attendanceResponse = await api.get("attendance/");
+
 
 
       setStudents(studentsResponse.data.length);
@@ -30,107 +48,149 @@ function Dashboard() {
       setTeachers(teachersResponse.data.length);
       setSubjects(subjectsResponse.data.length);
 
-    } catch (error) {
+      setParents(parentsResponse.data.length);
+      setGrades(gradesResponse.data.length);
+      setAttendance(attendanceResponse.data.length);
+
+
+
+    } catch(error) {
 
       console.log(error);
 
     }
 
+
   };
 
 
-  return (
-
-    <div className="container-fluid">
-
-      <h2 className="text-center mb-4">
-        Tableau de bord
-      </h2>
-
-
-      <div className="row g-4 justify-content-center">
-
-
-        {/* Étudiants */}
-        <div className="col-12 col-sm-6 col-lg-3">
-
-          <div className="card bg-primary text-white shadow h-100">
-
-            <div className="card-body text-center">
-
-              <h5>Étudiants</h5>
-
-              <h1>{students}</h1>
-
-            </div>
-
-          </div>
-
-        </div>
 
 
 
-        {/* Classes */}
-        <div className="col-12 col-sm-6 col-lg-3">
 
-          <div className="card bg-success text-white shadow h-100">
+  const Card = ({color, title, value}) => (
 
-            <div className="card-body text-center">
+    <div className="flex-fill">
 
-              <h5>Classes</h5>
+      <div className={`card ${color} text-white shadow h-100`}>
 
-              <h1>{classes}</h1>
-
-            </div>
-
-          </div>
-
-        </div>
+        <div className="card-body text-center p-2">
 
 
+          <h6 className="mb-1">
 
-        {/* Enseignants */}
-        <div className="col-12 col-sm-6 col-lg-3">
+            {title}
 
-          <div className="card bg-warning text-dark shadow h-100">
-
-            <div className="card-body text-center">
-
-              <h5>Enseignants</h5>
-
-              <h1>{teachers}</h1>
-
-            </div>
-
-          </div>
-
-        </div>
+          </h6>
 
 
+          <h3 className="mb-0">
 
-        {/* Matières */}
-        <div className="col-12 col-sm-6 col-lg-3">
+            {value}
 
-          <div className="card bg-danger text-white shadow h-100">
+          </h3>
 
-            <div className="card-body text-center">
-
-              <h5>Matières</h5>
-
-              <h1>{subjects}</h1>
-
-            </div>
-
-          </div>
 
         </div>
 
 
       </div>
 
+
     </div>
 
   );
+
+
+
+
+
+
+  return (
+
+
+    <div className="container-fluid">
+
+
+      <h3 className="text-center mb-3">
+
+        📊 Tableau de bord
+
+      </h3>
+
+
+
+
+
+
+      <div className="d-flex gap-2 flex-nowrap">
+
+
+
+        <Card
+          color="bg-primary"
+          title="👨‍🎓 Étudiants"
+          value={students}
+        />
+
+
+
+        <Card
+          color="bg-success"
+          title="🏫 Classes"
+          value={classes}
+        />
+
+
+
+        <Card
+          color="bg-warning text-dark"
+          title="👨‍🏫 Enseignants"
+          value={teachers}
+        />
+
+
+
+        <Card
+          color="bg-danger"
+          title="📚 Matières"
+          value={subjects}
+        />
+
+
+
+        <Card
+          color="bg-info"
+          title="👨‍👩‍👧 Parents"
+          value={parents}
+        />
+
+
+
+        <Card
+          color="bg-secondary"
+          title="📊 Notes"
+          value={grades}
+        />
+
+
+
+        <Card
+          color="bg-dark"
+          title="📅 Absences"
+          value={attendance}
+        />
+
+
+
+      </div>
+
+
+    </div>
+
+
+  );
+
 
 }
 

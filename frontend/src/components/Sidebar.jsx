@@ -7,7 +7,8 @@ import {
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
-
+import { FaClipboardList } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 
 function Sidebar() {
 
@@ -44,6 +45,20 @@ function Sidebar() {
           >
             <FaUserGraduate className="me-3" />
             Étudiants
+          </Link>
+        </li>
+
+        <li className="nav-item mb-3">
+
+          <Link 
+                 to="/parents" 
+                 className="nav-link text-white d-flex align-items-center"
+            >
+
+                <FaUsers className="me-3" />
+
+                  Parents
+
           </Link>
 
         </li>
@@ -89,6 +104,29 @@ function Sidebar() {
           </Link>
 
         </li>
+        
+       <li className="nav-item mb-3">
+
+         <Link 
+           to="/grades" 
+           className="nav-link text-white d-flex align-items-center"
+          > 
+           <FaClipboardList className="me-3" />
+             Notes
+          </Link>
+
+        </li>
+        <li className="nav-item mb-3">
+
+          <Link 
+            to="/attendance" 
+            className="nav-link text-white d-flex align-items-center"
+          >
+            <FaUserGraduate className="me-3" />
+            Absent
+          </Link>
+        </li>
+
 
 
       </ul>

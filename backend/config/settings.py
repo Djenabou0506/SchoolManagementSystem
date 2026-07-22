@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'students',
+    'parents',
     'teachers',
     'classes',
     'subjects',
+    'bulletins',
+    'grades',
+    'attendance',
     'core',
     'corsheaders',
     'rest_framework',  # 👈 on ajoute notre app ici

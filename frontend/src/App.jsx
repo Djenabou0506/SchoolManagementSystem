@@ -17,6 +17,22 @@ import EditTeacher from "./pages2/EditTeacher";
 import Subjects from "./pages3/Subjects";
 import AddSubject from "./pages3/AddSubject";
 import EditSubject from "./pages3/EditSubject";
+
+import Grades from "./pagesGrade/Grades";
+import AddGrade from "./pagesGrade/AddGrade";
+import EditGrade from "./pagesGrade/EditGrade";
+
+import AddAttendance from "./pagesAttendance/AddAttendance";
+import EditAttendance from "./pagesAttendance/EditAttendance";
+import Attendance from "./pagesAttendance/Attendance";
+
+import Parents from "./pagesParent/Parents";
+import AddParent from "./pagesParent/AddParent";
+import EditParent from "./pagesParent/EditParent";
+
+import Bulletins from "./pagesBulletin/Bulletins";
+import BulletinDetail from "./pagesBulletin/BulletinDetail";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -90,6 +106,41 @@ function App() {
                 path="/edit-subject/:id" 
                 element={<EditSubject />}
               />
+              
+              <Route 
+                path="/grades"
+                element={<Grades />}
+              />
+              
+              <Route
+                path="/add-grade"
+                element={<AddGrade />}
+              />
+              <Route
+                path="/edit-grade/:id"
+                element={<EditGrade />}
+              />
+             
+
+              <Route
+                path="/attendance"
+                element={<Attendance />}
+              />
+              <Route
+                path="/add-attendance"
+                element={<AddAttendance />}
+              />
+              <Route
+                path="/edit-attendance/:id"
+                element={<EditAttendance />}
+              />
+              <Route path="/parents" element={<Parents />} />
+
+              <Route path="/add-parent" element={<AddParent />} />
+
+              <Route path="/edit-parent/:id" element={<EditParent />} />
+              <Route path="/bulletins"  element={<Bulletins />} />
+              <Route path="/bulletin/:id" element={<BulletinDetail />} />
             </Routes>
 
           </div>

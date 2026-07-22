@@ -4,16 +4,13 @@ from .models import Teacher
 
 class TeacherSerializer(serializers.ModelSerializer):
 
-    subject_nom = serializers.StringRelatedField(
-        source="subject",
+    subject_nom = serializers.CharField(
+        source="subject.nom",
         read_only=True
     )
 
-
     class Meta:
-
         model = Teacher
-
         fields = [
             "id",
             "prenom",
@@ -22,5 +19,4 @@ class TeacherSerializer(serializers.ModelSerializer):
             "telephone",
             "subject",
             "subject_nom",
-            "date_creation",
         ]

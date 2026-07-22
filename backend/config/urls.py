@@ -35,4 +35,8 @@ urlpatterns = [
     path('api/', include('teachers.urls')),
     path('api/', include('classes.urls')),
     path('api/', include('subjects.urls')),
+    path('api/', include('grades.urls')),
+    path('api/', include('attendance.urls')),
+    path('api/', include('parents.urls')),
+    path('api/bulletins/', include('bulletins.urls')),
 ]
